@@ -13,7 +13,7 @@ jobs:
       matrix:
         include:
           - { preset: "Windows Desktop", dir: windows, file: initial-d.exe }
-          - { preset: "Linux/X11",       dir: linux,   file: initial-d.x86_64 }
+          - { preset: "Linux",       dir: linux,   file: initial-d.x86_64 }
     steps:
       - uses: actions/checkout@v4
       - name: Setup templates
