@@ -15,11 +15,6 @@ func _physics_process(delta: float) -> void:
 	
 	# same as above for steering direction
 	var steering_dir = Input.get_action_strength("Left") - Input.get_action_strength("Right")
-
-	var RPM_LEFT = abs($wheel_back_left.get_rpm())
-	var RPM_RIGHT = abs($wheel_back_right.get_rpm())
-	var RPM = (RPM_LEFT + RPM_RIGHT) / 2.0 # Get average RPM
-	
 	var torque = dir * max_torque
 	
 	steering = lerp(steering, steering_dir * turn_amount, turn_speed * delta)

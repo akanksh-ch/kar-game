@@ -1,0 +1,31 @@
+name: build
+on: push
+
+env:
+  GODOT_VERSION: 4.7.2   # must match the image tag
+  EXPORT_NAME: initial-d
+
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    container: barichello/godot-ci:4.7.2
+    strategy:
+      matrix:
+        include:
+          - { preset: "Windows Desktop", dir: windows, file: initial-d.exe }
+          - { preset: "Linux/X11",       dir: linux,   file: initial-d.x86_64 }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates ~/.config
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/
+      - name: Export
+        run: |
+          mkdir -p build/${{ matrix.dir }}
+          godot --headless --export-release "${{ matrix.preset }}" build/${{ matrix.dir }}/${{ matrix.file }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.dir }}
+          path: build/${{ matrix.dir }}
