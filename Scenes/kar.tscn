@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://de70vagbk86hf" path="res://Scripts/kar.gd" id="1_4j05u"]
 [ext_resource type="Texture2D" uid="uid://c40i77injg0ah" path="res://Assets/Textures/colormap.png" id="1_i7inn"]
+[ext_resource type="Script" uid="uid://lhxwllrovar4" path="res://Scripts/Camera.gd" id="3_g5oqf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 size = Vector3(1.3062744, 0.84967804, 2.4331055)
@@ -231,7 +232,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -1.0436862)
 mesh = SubResource("ArrayMesh_g5oqf")
 
 [node name="wheel_back_left" type="VehicleWheel3D" parent="." unique_id=760376154]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, 0.25, -0.66)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.25, -0.66)
+use_as_traction = true
 wheel_radius = 0.3
 
 [node name="wheel-back-left" type="MeshInstance3D" parent="wheel_back_left" unique_id=1218306427]
@@ -239,7 +241,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135, 0, 0)
 mesh = SubResource("ArrayMesh_184o1")
 
 [node name="wheel_back_right" type="VehicleWheel3D" parent="." unique_id=386290848]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66, 0.25, -0.66)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.25, -0.66)
+use_as_traction = true
 wheel_radius = 0.3
 
 [node name="wheel-back-right" type="MeshInstance3D" parent="wheel_back_right" unique_id=1531360983]
@@ -247,7 +250,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.135, 0, 0)
 mesh = SubResource("ArrayMesh_dgrdw")
 
 [node name="wheel_front_right" type="VehicleWheel3D" parent="." unique_id=336991940]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66, 0.25, 0.66)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.25, 0.66)
+use_as_steering = true
 wheel_radius = 0.3
 
 [node name="wheel-front-right" type="MeshInstance3D" parent="wheel_front_right" unique_id=872266679]
@@ -255,15 +259,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.135, 0, 0)
 mesh = SubResource("ArrayMesh_2oat5")
 
 [node name="wheel_front_left" type="VehicleWheel3D" parent="." unique_id=932756798]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, 0.25, 0.66)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.25, 0.66)
+use_as_steering = true
 wheel_radius = 0.3
 
 [node name="wheel-front-left" type="MeshInstance3D" parent="wheel_front_left" unique_id=1823876074]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135, 0, 0)
 mesh = SubResource("ArrayMesh_2x4ff")
 
-[node name="CamArm" type="SpringArm3D" parent="." unique_id=888116283]
-transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0, 1.5, -3)
+[node name="CameraPivot" type="Node3D" parent="." unique_id=622915790]
+script = ExtResource("3_g5oqf")
+
+[node name="CamArm" type="SpringArm3D" parent="CameraPivot" unique_id=888116283]
+transform = Transform3D(-1, 5.1643603e-08, -1.4188963e-07, 0, 0.93969256, 0.34202012, 1.509958e-07, 0.34202012, -0.93969256, 0, 1.5, -3)
 collision_mask = 0
 
-[node name="Camera3D" type="Camera3D" parent="CamArm" unique_id=460809554]
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/CamArm" unique_id=460809554]
