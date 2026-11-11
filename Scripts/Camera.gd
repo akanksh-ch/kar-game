@@ -8,4 +8,3 @@ func _input(event: InputEvent) -> void:
 		self.rotation_degrees.y += -event.relative.x
 		
 		self.rotation_degrees.x = clampf(rotation_degrees.x, -70, 70) # 90 - 20 as spring arm is already rotated to 20 degrees by default
-		

@@ -10,14 +10,28 @@ size = Vector3(1000, 0.2, 1000)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+
 [node name="level_1" type="Node3D" unique_id=862061683]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2140228268]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2134028303]
 shape = SubResource("BoxShape3D_g4v7s")
+debug_fill = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1475187289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0037782192, 0, 0)
 mesh = SubResource("BoxMesh_g4v7s")
 surface_material_override/0 = SubResource("StandardMaterial3D_yf5fn")
+
+[node name="Ball" type="StaticBody3D" parent="." unique_id=644047969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9529247, 0, -0.621279)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=1940970113]
+shape = SubResource("SphereShape3D_g4v7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball" unique_id=111152083]
+mesh = SubResource("SphereMesh_g4v7s")
