@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cvm0swbf731a3"]
 
 [ext_resource type="PackedScene" uid="uid://cmxvlkqpwt4ea" path="res://Scenes/kar.tscn" id="2_8gbba"]
-[ext_resource type="PackedScene" uid="uid://cfvc13vkwj0ce" path="res://Scenes/level_1.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://tes6xph6a1oi" path="res://Scenes/level_2.tscn" id="2_bo1nx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3gngh"]
 sky_top_color = Color(0, 0.46696, 0.75728357, 1)
@@ -17,13 +17,26 @@ sky = SubResource("Sky_d0u6y")
 
 [node name="Main" type="Node3D" unique_id=1722680687]
 
-[node name="Kar" parent="." unique_id=1448106163 instance=ExtResource("2_8gbba")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2181168, 1.1160698, -3.3848624)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1371791822]
 environment = SubResource("Environment_g4v7s")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1143333079]
 transform = Transform3D(1, 0, 0, 0, 0.6122357, 0.7906753, 0, -0.79067534, 0.6122357, 0, 5.1804576, 0)
 
-[node name="Level1" parent="." unique_id=476209792 instance=ExtResource("2_bo1nx")]
+[node name="Kar" parent="." unique_id=1448106163 instance=ExtResource("2_8gbba")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.246948, 1.0654352, -2.9196463)
+
+[node name="level_2" parent="." unique_id=1882282788 instance=ExtResource("2_bo1nx")]
+
+[node name="Control" type="Control" parent="." unique_id=1190956255]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control" unique_id=1339058887]
+layout_mode = 0
+offset_right = 691.0
+offset_bottom = 339.0
+theme_override_font_sizes/font_size = 104
+text = "WASD to move"

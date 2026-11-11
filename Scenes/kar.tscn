@@ -235,7 +235,6 @@ shadow_mesh = SubResource("ArrayMesh_6m2sp")
 albedo_texture = ExtResource("1_i7inn")
 
 [node name="Kar" type="VehicleBody3D" unique_id=1448106163]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.085)
 mass = 2250.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.1, -0.05)

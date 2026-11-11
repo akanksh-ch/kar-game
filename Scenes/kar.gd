@@ -21,6 +21,6 @@ func _physics_process(delta: float) -> void:
 	engine_force = torque
 	
 	print(engine_force)
-
-	if Input.is_key_pressed(KEY_SPACE):
-		apply_impulse(Vector3(0, 4 * mass, 0))
+	
+	#if Input.is_key_pressed(KEY_SPACE):
+		#apply_impulse(Vector3(0, 4 * mass, 0))
