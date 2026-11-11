@@ -7,8 +7,12 @@ size = Vector3(1000, 0.2, 1000)
 lightmap_size_hint = Vector2i(104, 57)
 size = Vector3(1000, 0.2, 1000)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
-albedo_color = Color(0, 0, 0, 1)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qqy1o"]
+load_path = "res://.godot/imported/checkers.png-6668026d9b26c3ba866a4475b8fcd501.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqy1o"]
+albedo_texture = SubResource("CompressedTexture2D_qqy1o")
+uv1_scale = Vector3(50, 50, 50)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
 
@@ -25,7 +29,7 @@ debug_fill = false
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1475187289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0037782192, 0, 0)
 mesh = SubResource("BoxMesh_g4v7s")
-surface_material_override/0 = SubResource("StandardMaterial3D_yf5fn")
+surface_material_override/0 = SubResource("StandardMaterial3D_qqy1o")
 
 [node name="Ball" type="StaticBody3D" parent="." unique_id=644047969]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9529247, 0, -0.621279)
