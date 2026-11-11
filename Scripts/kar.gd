@@ -27,8 +27,3 @@ func _physics_process(delta: float) -> void:
 	steering = lerp(steering, deg_to_rad(35 * Input.get_action_strength("Left")) + deg_to_rad(-35 * Input.get_action_strength("Right")), 0.1)
 	
 	print(rotation_degrees)
-	
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.keycode == 32: # space bar
-		rotation = Vector3.ZERO
-		
