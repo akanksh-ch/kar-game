@@ -215,6 +215,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_c2otq")
 
 [node name="Kar" type="VehicleBody3D" unique_id=898085786]
+mass = 1275.0
 script = ExtResource("1_4j05u")
 
 [node name="HitBox" type="CollisionShape3D" parent="." unique_id=596376399]
@@ -230,7 +231,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -1.0436862)
 mesh = SubResource("ArrayMesh_g5oqf")
 
 [node name="wheel_back_left" type="VehicleWheel3D" parent="." unique_id=760376154]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, -0.05, -0.66)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, 0.25, -0.66)
 wheel_radius = 0.3
 
 [node name="wheel-back-left" type="MeshInstance3D" parent="wheel_back_left" unique_id=1218306427]

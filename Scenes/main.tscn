@@ -26,4 +26,4 @@ transform = Transform3D(1, 0, 0, 0, 0.6122357, 0.7906753, 0, -0.79067534, 0.6122
 [node name="level_1" parent="." unique_id=862061683 instance=ExtResource("1_bo1nx")]
 
 [node name="Kar" parent="." unique_id=898085786 instance=ExtResource("2_8gbba")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2834053, 1.8903146, -0.9816575)
+transform = Transform3D(0.9998018, -0.019908011, 0, 0.019908011, 0.9998018, 0, 0, 0, 1, 0, 0.33, 0)
