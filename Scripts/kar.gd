@@ -8,6 +8,10 @@ extends VehicleBody3D
 @export var back_wheel_grip = 1.125
 @export var back_drift_grip = 0.75
 
+@export var max_speed = 20
+
+@export var power_curve: Curve
+
 # Configuration
 func _ready() -> void:
 	for wheel in wheels:
@@ -39,7 +43,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Set gas
 	if Input.is_action_pressed("Gas"):
-		engine_force = Input.get_action_strength("Gas") * EngineForce
+		engine_force = Input.get_action_strength("Gas") * EngineForce * (power_curve.sample_baked(linear_velocity.length() / max_speed))
 	
 	# Reset gas
 	elif Input.is_action_just_released("Gas"):
@@ -70,5 +74,6 @@ func _physics_process(delta: float) -> void:
 		$wheel_front_right.set_brake(0)
 		
 	#print(engine_force)
-	print($wheel_back_left.get_skidinfo(), ", ", $wheel_back_right.get_skidinfo(), ", ", $wheel_front_left.get_skidinfo(), ", ", $wheel_front_right.get_skidinfo())
+	#print($wheel_back_left.get_skidinfo(), ", ", $wheel_back_right.get_skidinfo(), ", ", $wheel_front_left.get_skidinfo(), ", ", $wheel_front_right.get_skidinfo())
+	print(linear_velocity)
 		
