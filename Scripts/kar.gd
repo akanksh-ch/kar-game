@@ -10,7 +10,7 @@ extends VehicleBody3D
 
 @export var max_speed = 20
 
-@export var power_curve: Curve
+@export var power_curve: Curve = load("res://Scenes/power_curve.tres")
 
 # Configuration
 func _ready() -> void:
