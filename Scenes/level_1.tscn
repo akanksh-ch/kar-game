@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://cfvc13vkwj0ce"]
 
 [ext_resource type="MeshLibrary" uid="uid://c6yry0nsiywmt" path="res://Assets/racing_kit_mesh_library.tres" id="1_vk57k"]
+[ext_resource type="Script" uid="uid://dsjypvcf6gsyp" path="res://Scripts/kill_zone.gd" id="2_8ffim"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kirvf"]
+size = Vector3(200, 1, 200)
 
 [node name="level_1" type="Node3D" unique_id=862061683]
 
@@ -14,3 +18,11 @@ cell_scale = 2.0
 data = {
 "cells": PackedInt32Array(65534, 0, 2, 65534, 1, 1, 65534, 2, 1, 65534, 3, 1, 65534, 4, 1, 65534, 5, 1, 65534, 6, 1, 65535, 7, 1048578, 0, 7, 1048577, 1, 7, 1048577, 2, 7, 1048577, 3, 7, 1048577, 4, 7, 1048577, 5, 7, 1048577, 6, 6, 655362, 5, 5, 1441794, 5, 6, 1048578, 4, 5, 1, 4, 4, 1, 4, 2, 1441794, 3, 2, 1441793, 2, 2, 1441793, 2, 3, 1048578, 2, 1, 655361, 2, 0, 655361, 1, 65535, 1441794, 65535, 65535, 1441793, 0, 65535, 1441793)
 }
+
+[node name="KillZone" type="Area3D" parent="." unique_id=208056223]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.232, -5, 41.445)
+script = ExtResource("2_8ffim")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone" unique_id=1121825103]
+shape = SubResource("BoxShape3D_kirvf")
+debug_color = Color(0, 0.6, 0.69803923, 1)

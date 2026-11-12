@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var SENSITIVITY = 1.0
+@export var SENSITIVITY = 0.5
 @onready var target: Node3D = get_parent()  # the Kar
 
 func _ready() -> void:
