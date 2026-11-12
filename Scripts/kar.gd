@@ -10,6 +10,8 @@ extends VehicleBody3D
 
 @export var max_speed = 20
 
+@export var steering_angle = 35
+
 @export var power_curve: Curve = load("res://Scenes/power_curve.tres")
 
 # Configuration
@@ -39,7 +41,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	#brake = Input.get_action_strength("Brake") * BrakingForce
-	steering = lerp(steering, deg_to_rad(35 * Input.get_action_strength("Left")) + deg_to_rad(-35 * Input.get_action_strength("Right")), 0.1)
+	
+	# Limit steering based on speed
+	
+	steering = lerp(steering,
+	deg_to_rad(steering_angle * Input.get_action_strength("Left")) + 
+	deg_to_rad(-steering_angle * Input.get_action_strength("Right")),
+	power_curve.sample_baked(linear_velocity.length() / max_speed) / 20)
 	
 	# Set gas
 	if Input.is_action_pressed("Gas"):
