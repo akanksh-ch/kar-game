@@ -4,17 +4,17 @@ extends VehicleBody3D
 @export var EngineForce = 2250
 @export var BrakingForce = 150
 
-@export var front_wheel_grip = 1.0
-@export var back_wheel_grip = 0.75
-@export var back_drift_grip = 0.5
+@export var front_wheel_grip = 1.5
+@export var back_wheel_grip = 1.125
+@export var back_drift_grip = 0.75
 
 # Configuration
 func _ready() -> void:
 	for wheel in wheels:
 		wheel.set_suspension_stiffness(70.0)
-		wheel.set_suspension_travel(0.15)
-		wheel.set_damping_compression(back_drift_grip)
-		wheel.set_damping_relaxation(0.7)
+		wheel.set_suspension_travel(0.1)
+		wheel.set_damping_compression(1.5)
+		wheel.set_damping_relaxation(2.5)
 		wheel.set_roll_influence(0.3)
 		#wheel.set_suspension_rest_length(0.35)
 		
