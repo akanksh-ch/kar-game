@@ -4,6 +4,7 @@ on: push
 env:
   GODOT_VERSION: 4.7.2   # must match the image tag
   EXPORT_NAME: kar-game
+  ITCH_TARGET: akankshch/kar-game
 
 jobs:
   export:
@@ -30,3 +31,22 @@ jobs:
         with:
           name: ${{ matrix.dir }}
           path: build/${{ matrix.dir }}
+
+  itchio-upload:
+    needs: export
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: web
+          path: build/web
+
+      - name: Setup butler
+        uses: remarkablegames/setup-butler@v3
+
+      # https://itch.io/docs/butler/pushing.html
+      - name: Upload web export to itch.io
+        run: butler push build/web ${{ env.ITCH_TARGET }}:html5
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
