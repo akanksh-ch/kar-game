@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Initial-D"
+config/name="Kar game"
+config/description="Drifting game with realistic suspension"
 run/main_scene="uid://cvm0swbf731a3"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"

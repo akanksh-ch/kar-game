@@ -3,7 +3,7 @@ on: push
 
 env:
   GODOT_VERSION: 4.7.2   # must match the image tag
-  EXPORT_NAME: initial-d
+  EXPORT_NAME: kar-game
 
 jobs:
   export:
@@ -12,8 +12,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - { preset: "Windows Desktop", dir: windows, file: initial-d.exe }
-          - { preset: "Linux",       dir: linux,   file: initial-d.x86_64 }
+          - { preset: "Windows Desktop", dir: windows, file: kar-game.exe }
+          - { preset: "Linux",       dir: linux,   file: kar-game.x86_64 }
+          - { preset: "Web",       dir: web,   file: index.html }
     steps:
       - uses: actions/checkout@v4
       - name: Setup templates
