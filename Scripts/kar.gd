@@ -4,14 +4,17 @@ extends VehicleBody3D
 @export var EngineForce = 2250
 @export var BrakingForce = 150
 
+@export var front_wheel_grip = 1.0
+@export var back_wheel_grip = 0.75
+@export var back_drift_grip = 0.5
+
 # Configuration
 func _ready() -> void:
 	for wheel in wheels:
 		wheel.set_suspension_stiffness(70.0)
 		wheel.set_suspension_travel(0.15)
-		wheel.set_damping_compression(0.5)
+		wheel.set_damping_compression(back_drift_grip)
 		wheel.set_damping_relaxation(0.7)
-		wheel.set_friction_slip(1.0)
 		wheel.set_roll_influence(0.3)
 		#wheel.set_suspension_rest_length(0.35)
 		
@@ -21,37 +24,48 @@ func _ready() -> void:
 			#wheel.get_suspension_rest_length()
 		#)
 	
-	# set back tires friction to be lower than front tires
+	# set friction of tires
 	
-	$wheel_back_left.set_friction_slip(0.75)
-	$wheel_back_right.set_friction_slip(0.75)
+	$wheel_back_left.set_friction_slip(back_wheel_grip)
+	$wheel_back_right.set_friction_slip(back_wheel_grip)
+	$wheel_front_left.set_friction_slip(front_wheel_grip)
+	$wheel_back_left.set_friction_slip(front_wheel_grip)
 		
 
 func _physics_process(delta: float) -> void:
 	
-	if Input.is_action_pressed("Gas"):
-		engine_force = Input.get_action_strength("Gas") * EngineForce
-	elif Input.is_action_just_released("Gas"):
-		engine_force = 0.0
-	
 	#brake = Input.get_action_strength("Brake") * BrakingForce
 	steering = lerp(steering, deg_to_rad(35 * Input.get_action_strength("Left")) + deg_to_rad(-35 * Input.get_action_strength("Right")), 0.1)
 	
+	# Set gas
+	if Input.is_action_pressed("Gas"):
+		engine_force = Input.get_action_strength("Gas") * EngineForce
+	
+	# Reset gas
+	elif Input.is_action_just_released("Gas"):
+		engine_force = 0.0
+		
 	if Input.is_action_pressed("HandBrake"):
+		# Set brakes
 		$wheel_back_left.set_brake(BrakingForce)
 		$wheel_back_right.set_brake(BrakingForce)
-		$wheel_back_left.set_friction_slip(0.5)
-		$wheel_back_right.set_friction_slip(0.5)
+		
+		# Set grip
+		$wheel_back_left.set_friction_slip(back_drift_grip)
+		$wheel_back_right.set_friction_slip(back_drift_grip)
 	else:
+		# Reset all
 		$wheel_back_left.set_brake(0)
 		$wheel_back_right.set_brake(0)
-		$wheel_back_left.set_friction_slip(0.75)
-		$wheel_back_right.set_friction_slip(0.75)
+		$wheel_back_left.set_friction_slip(back_wheel_grip)
+		$wheel_back_right.set_friction_slip(back_wheel_grip)
 		
 	if Input.is_action_pressed("Brake"):
+		# Set brakes
 		$wheel_front_left.set_brake(BrakingForce)
 		$wheel_front_right.set_brake(BrakingForce)
 	else:
+		# Reset values
 		$wheel_front_left.set_brake(0)
 		$wheel_front_right.set_brake(0)
 		
