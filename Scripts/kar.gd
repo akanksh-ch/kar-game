@@ -7,12 +7,12 @@ extends VehicleBody3D
 # Configuration
 func _ready() -> void:
 	for wheel in wheels:
-		wheel.set_suspension_stiffness(125.0)
-		wheel.set_suspension_travel(0.05)
+		wheel.set_suspension_stiffness(70.0)
+		wheel.set_suspension_travel(0.15)
 		wheel.set_damping_compression(0.5)
-		wheel.set_damping_relaxation(0.8)
-		wheel.set_friction_slip(2.0)
-		wheel.set_roll_influence(1.0)
+		wheel.set_damping_relaxation(0.7)
+		wheel.set_friction_slip(1.0)
+		wheel.set_roll_influence(0.3)
 		#wheel.set_suspension_rest_length(0.35)
 		
 		#print(
@@ -23,15 +23,15 @@ func _ready() -> void:
 	
 	# set back tires friction to be lower than front tires
 	
-	$wheel_back_left.set_friction_slip(1.0)
-	$wheel_back_right.set_friction_slip(1.0)
+	$wheel_back_left.set_friction_slip(0.75)
+	$wheel_back_right.set_friction_slip(0.75)
 		
 
 func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("Gas"):
 		engine_force = Input.get_action_strength("Gas") * EngineForce
-	else:
+	elif Input.is_action_just_released("Gas"):
 		engine_force = 0.0
 	
 	#brake = Input.get_action_strength("Brake") * BrakingForce
@@ -40,9 +40,13 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("HandBrake"):
 		$wheel_back_left.set_brake(BrakingForce)
 		$wheel_back_right.set_brake(BrakingForce)
+		$wheel_back_left.set_friction_slip(0.5)
+		$wheel_back_right.set_friction_slip(0.5)
 	else:
 		$wheel_back_left.set_brake(0)
 		$wheel_back_right.set_brake(0)
+		$wheel_back_left.set_friction_slip(0.75)
+		$wheel_back_right.set_friction_slip(0.75)
 		
 	if Input.is_action_pressed("Brake"):
 		$wheel_front_left.set_brake(BrakingForce)
@@ -51,5 +55,6 @@ func _physics_process(delta: float) -> void:
 		$wheel_front_left.set_brake(0)
 		$wheel_front_right.set_brake(0)
 		
-	#print($wheel_back_left.get_skidinfo(), ", ", $wheel_back_right.get_skidinfo(), ", ", $wheel_front_left.get_skidinfo(), ", ", $wheel_front_right.get_skidinfo())
+	#print(engine_force)
+	print($wheel_back_left.get_skidinfo(), ", ", $wheel_back_right.get_skidinfo(), ", ", $wheel_front_left.get_skidinfo(), ", ", $wheel_front_right.get_skidinfo())
 		
