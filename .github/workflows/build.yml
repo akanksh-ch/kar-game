@@ -36,17 +36,23 @@ jobs:
     needs: export
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - { dir: web, channel: html5 }
+          - { dir: windows, channel: windows }
+          - { dir: linux, channel: linux }
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: web
-          path: build/web
+          name: ${{ matrix.dir }}
+          path: build/${{ matrix.dir }}
 
       - name: Setup butler
         uses: remarkablegames/setup-butler@v3
 
       # https://itch.io/docs/butler/pushing.html
-      - name: Upload web export to itch.io
-        run: butler push build/web ${{ env.ITCH_TARGET }}:html5
+      - name: Upload ${{ matrix.dir }} export to itch.io
+        run: butler push build/${{ matrix.dir }} ${{ env.ITCH_TARGET }}:${{ matrix.channel }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
