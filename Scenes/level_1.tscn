@@ -1,41 +1,28 @@
 [gd_scene format=3 uid="uid://cfvc13vkwj0ce"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
-size = Vector3(1000, 0.2, 1000)
+[ext_resource type="MeshLibrary" uid="uid://c6yry0nsiywmt" path="res://Assets/racing_kit_mesh_library.tres" id="1_vk57k"]
+[ext_resource type="Script" uid="uid://dsjypvcf6gsyp" path="res://Scripts/kill_zone.gd" id="2_8ffim"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
-lightmap_size_hint = Vector2i(104, 57)
-size = Vector3(1000, 0.2, 1000)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qqy1o"]
-load_path = "res://.godot/imported/checkers.png-6668026d9b26c3ba866a4475b8fcd501.s3tc.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqy1o"]
-albedo_texture = SubResource("CompressedTexture2D_qqy1o")
-uv1_scale = Vector3(50, 50, 50)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_kirvf"]
+size = Vector3(200, 1, 200)
 
 [node name="level_1" type="Node3D" unique_id=862061683]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2140228268]
+[node name="GridMap" type="GridMap" parent="." unique_id=407610056]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh_library = ExtResource("1_vk57k")
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+cell_scale = 2.0
+data = {
+"cells": PackedInt32Array(65534, 0, 2, 65534, 1, 1, 65534, 2, 1, 65534, 3, 1, 65534, 4, 1, 65534, 5, 1, 65534, 6, 1, 65535, 7, 1048578, 0, 7, 1048577, 1, 7, 1048577, 2, 7, 1048577, 3, 7, 1048577, 4, 7, 1048577, 5, 7, 1048577, 6, 6, 655362, 5, 5, 1441794, 5, 6, 1048578, 4, 5, 1, 4, 4, 1, 4, 2, 1441794, 3, 2, 1441793, 2, 2, 1441793, 2, 3, 1048578, 2, 1, 655361, 2, 0, 655361, 1, 65535, 1441794, 65535, 65535, 1441793, 0, 65535, 1441793)
+}
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2134028303]
-shape = SubResource("BoxShape3D_g4v7s")
-debug_fill = false
+[node name="KillZone" type="Area3D" parent="." unique_id=208056223]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.232, -5, 41.445)
+script = ExtResource("2_8ffim")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1475187289]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0037782192, 0, 0)
-mesh = SubResource("BoxMesh_g4v7s")
-surface_material_override/0 = SubResource("StandardMaterial3D_qqy1o")
-
-[node name="Ball" type="StaticBody3D" parent="." unique_id=644047969]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9529247, 0, -0.621279)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=1940970113]
-shape = SubResource("SphereShape3D_g4v7s")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball" unique_id=111152083]
-mesh = SubResource("SphereMesh_g4v7s")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone" unique_id=1121825103]
+shape = SubResource("BoxShape3D_kirvf")
+debug_color = Color(0, 0.6, 0.69803923, 1)
