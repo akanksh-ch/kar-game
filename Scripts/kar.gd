@@ -26,3 +26,5 @@ func _physics_process(delta: float) -> void:
 	engine_force = Input.get_action_strength("Gas") * EngineForce
 	brake = Input.get_action_strength("Brake") * BrakingForce
 	steering = lerp(steering, deg_to_rad(35 * Input.get_action_strength("Left")) + deg_to_rad(-35 * Input.get_action_strength("Right")), 0.1)
+	
+	print($wheel_back_left.get_skidinfo(), ", ", $wheel_back_right.get_skidinfo(), ", ", $wheel_front_left.get_skidinfo(), ", ", $wheel_front_right.get_skidinfo())

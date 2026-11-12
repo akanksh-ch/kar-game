@@ -11,6 +11,5 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_body_entered(body: Node3D) -> void:
-	body.global_position = Vector3(-14.73344, 0.33, 2.75041)
+	body.global_position = Vector3(-14.73344, 1.0, 2.75041)
 	body.global_rotation = Vector3.ZERO
-	body.linear_velocity = Vector3.ZERO
